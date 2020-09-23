@@ -2,6 +2,7 @@ package com.hgroenenboom.sustainability;
 
 import com.hgroenenboom.sustainability.data.Source;
 import com.hgroenenboom.sustainability.data.SourceState;
+import com.hgroenenboom.sustainability.data.SourceType;
 import com.hgroenenboom.sustainability.persistence.SourceRatingService;
 import com.hgroenenboom.sustainability.persistence.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,11 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.PropertySource;
 
 import com.hgroenenboom.sustainability.data.SourceRating;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {
@@ -33,9 +37,19 @@ public class Application {
     @GetMapping(path = "/add")
     public void saveDemo() {
         sourceRatingService.saveSourceRating(new SourceRating(0.5f
-                , sourceService.saveSource(new Source("description", "www.source.nl", "www.source2.nl", "An example source", SourceState.PENDING))
+                , sourceService.saveSource(new Source("description", "www.source.nl", "www.source2.nl", "An example source", SourceState.PENDING, SourceType.Website))
                 , "192.0.0.168")
         );
+    }
+
+    @GetMapping(path = "/getSourceStates", produces = MediaType.APPLICATION_JSON_VALUE)
+    public final String[] getSourceStates() {
+        return new String[]{SourceState.PENDING.name(), SourceState.APPROVED.name(), SourceState.DENIED.name()};
+    }
+
+    @GetMapping(path = "/getSourceTypes", produces = MediaType.APPLICATION_JSON_VALUE)
+    public final ArrayList<String> getSourceTypes() {
+        return SourceType.getTypes();
     }
 
     public static void main(String[] args) {
