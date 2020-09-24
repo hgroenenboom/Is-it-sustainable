@@ -1,8 +1,7 @@
 package com.hgroenenboom.sustainability.data;
 
-import org.joda.time.DateTime;
-
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class SourceUpdate extends SourceBase {
@@ -10,16 +9,16 @@ public class SourceUpdate extends SourceBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private DateTime dateTime;
+    private Date date;
 
     private SourceUpdateState state;
 
     @ManyToOne
     private Source sourceToUpdate;
 
-    public SourceUpdate(String description, String url, String fallbackUrl, String notes, SourceState sourceState, SourceType sourceType, DateTime dateTime, SourceUpdateState state, Source sourceToUpdate) {
+    public SourceUpdate(String description, String url, String fallbackUrl, String notes, SourceState sourceState, SourceType sourceType, Date date, SourceUpdateState state, Source sourceToUpdate) {
         super(description, url, fallbackUrl, notes, sourceState, sourceType);
-        this.dateTime = dateTime;
+        this.date = date;
         this.state = state;
         this.sourceToUpdate = sourceToUpdate;
     }
@@ -28,12 +27,12 @@ public class SourceUpdate extends SourceBase {
         return id;
     }
 
-    public DateTime getDateTime() {
-        return dateTime;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDateTime(DateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Source getSourceToUpdate() {

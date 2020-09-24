@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {OrganizationApi} from './api/organizationApi';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'IsItSustainable';
+
+  @Input()
+  orgs: string;
+
+  constructor(private organizationService : OrganizationApi) {
+    organizationService.getOrganizations().subscribe(
+      (event) => {
+        this.orgs = event;
+      }
+    );
+  }
 }

@@ -6,15 +6,13 @@ import com.hgroenenboom.sustainability.data.SustainabilityType;
 import com.hgroenenboom.sustainability.persistence.EventRatingService;
 import com.hgroenenboom.sustainability.persistence.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Random;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/event")
 public class EventAPI {
     @Autowired
