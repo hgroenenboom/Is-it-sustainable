@@ -4,6 +4,9 @@ import com.hgroenenboom.sustainability.data.Source;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class SourceService {
     @Autowired private SourceRepository repository;
@@ -14,5 +17,9 @@ public class SourceService {
 
     public Source saveSource(Source source) {
         return repository.save(source);
+    }
+
+    public List<Source> findAll() {
+        return repository.findAll();
     }
 }

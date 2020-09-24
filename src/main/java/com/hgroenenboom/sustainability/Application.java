@@ -34,14 +34,6 @@ public class Application {
         this.sourceService = sourceService;
     }
 
-    @GetMapping(path = "/add")
-    public void saveDemo() {
-        sourceRatingService.saveSourceRating(new SourceRating(0.5f
-                , sourceService.saveSource(new Source("description", "www.source.nl", "www.source2.nl", "An example source", SourceState.PENDING, SourceType.Website))
-                , "192.0.0.168")
-        );
-    }
-
     @GetMapping(path = "/getSourceStates", produces = MediaType.APPLICATION_JSON_VALUE)
     public final String[] getSourceStates() {
         return new String[]{SourceState.PENDING.name(), SourceState.APPROVED.name(), SourceState.DENIED.name()};

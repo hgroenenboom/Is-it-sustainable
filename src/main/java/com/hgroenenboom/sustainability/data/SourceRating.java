@@ -19,6 +19,8 @@ public class SourceRating extends Rating {
         this.source = source;
     }
 
+    protected SourceRating() {}
+
     public Long getId() {
         return id;
     }

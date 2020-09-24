@@ -12,6 +12,8 @@ public class SourceBase {
     private SourceState sourceState;
     private SourceType sourceType;
 
+    protected SourceBase() {}
+
     public SourceBase(String description, String url, String fallbackUrl, String notes, SourceState sourceState, SourceType sourceType) {
         this.description = description;
         this.url = url;
