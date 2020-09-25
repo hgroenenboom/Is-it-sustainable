@@ -1,1 +1,31 @@
-{{orgs}}
+<!--<ng-form ng-submit="that.print('test')" name="ngForm" novalidate>
+  Enter company name:
+  <input type="text" name="name" required ng-model="org.name">
+  <br>
+  Enter company website:
+  <input type="text" name="website" required ng-model="org.website">
+  <br>
+
+  <button type="submit" >
+    Submit
+  </button>
+</ng-form>-->
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Website</th>
+    <th scope="col">Partners</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let org of orgs ">
+    <th scope="row">{{ org.id }}</th>
+    <td>{{ org.name}}</td>
+    <td>{{ org.website}}</td>
+    <td>{{ org.partnerIds }}</td>
+  </tr>
+  </tbody>
+</table>

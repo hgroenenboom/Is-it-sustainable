@@ -55,7 +55,7 @@ public class SourceAPI {
         if(evnt == null)
             return null;
 
-        return sourceService.saveSource(new Source("desc", "url1", "url2", "notes", SourceState.PENDING, SourceType.Website, evnt));
+        return sourceService.saveSource(new Source("desc", "url1", "url2", "notes", State.PENDING, SourceType.Website, evnt));
     }
 
     @GetMapping("/getCredibility")

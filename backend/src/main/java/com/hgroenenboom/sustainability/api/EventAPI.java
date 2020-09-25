@@ -2,6 +2,7 @@ package com.hgroenenboom.sustainability.api;
 
 import com.hgroenenboom.sustainability.data.Event;
 import com.hgroenenboom.sustainability.data.EventRating;
+import com.hgroenenboom.sustainability.data.State;
 import com.hgroenenboom.sustainability.data.SustainabilityType;
 import com.hgroenenboom.sustainability.persistence.EventRatingService;
 import com.hgroenenboom.sustainability.persistence.EventService;
@@ -34,6 +35,6 @@ public class EventAPI {
 
     @GetMapping("/add")
     public Event addEvent() {
-        return eventService.save(new Event("name", "descr", SustainabilityType.Animals, null));
+        return eventService.save(new Event("name", "descr", SustainabilityType.Animals, State.PENDING, 1995, 2012, null));
     }
 }

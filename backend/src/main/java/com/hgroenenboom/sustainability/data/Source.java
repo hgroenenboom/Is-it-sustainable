@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class Source extends SourceBase {
-    public Source(String description, String url, String fallbackUrl, String notes, SourceState sourceState, SourceType sourceType, Event event) {
+    public Source(String description, String url, String fallbackUrl, String notes, State sourceState, SourceType sourceType, Event event) {
         super(description, url, fallbackUrl, notes, sourceState, sourceType);
         this.event = event;
     }

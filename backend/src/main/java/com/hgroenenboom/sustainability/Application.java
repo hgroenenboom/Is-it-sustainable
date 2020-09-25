@@ -1,8 +1,7 @@
 package com.hgroenenboom.sustainability;
 
-import com.hgroenenboom.sustainability.data.Source;
-import com.hgroenenboom.sustainability.data.SourceState;
 import com.hgroenenboom.sustainability.data.SourceType;
+import com.hgroenenboom.sustainability.data.State;
 import com.hgroenenboom.sustainability.persistence.SourceRatingService;
 import com.hgroenenboom.sustainability.persistence.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 
-import com.hgroenenboom.sustainability.data.SourceRating;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +47,7 @@ public class Application {
 
     @GetMapping(path = "/getSourceStates", produces = MediaType.APPLICATION_JSON_VALUE)
     public final String[] getSourceStates() {
-        return new String[]{SourceState.PENDING.name(), SourceState.APPROVED.name(), SourceState.DENIED.name()};
+        return new String[]{State.PENDING.name(), State.APPROVED.name(), State.DENIED.name()};
     }
 
     @GetMapping(path = "/getSourceTypes", produces = MediaType.APPLICATION_JSON_VALUE)

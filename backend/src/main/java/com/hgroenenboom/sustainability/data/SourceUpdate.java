@@ -11,12 +11,12 @@ public class SourceUpdate extends SourceBase {
 
     private Date date;
 
-    private SourceUpdateState state;
+    private State state;
 
     @ManyToOne
     private Source sourceToUpdate;
 
-    public SourceUpdate(String description, String url, String fallbackUrl, String notes, SourceState sourceState, SourceType sourceType, Date date, SourceUpdateState state, Source sourceToUpdate) {
+    public SourceUpdate(String description, String url, String fallbackUrl, String notes, State sourceState, SourceType sourceType, Date date, State state, Source sourceToUpdate) {
         super(description, url, fallbackUrl, notes, sourceState, sourceType);
         this.date = date;
         this.state = state;
@@ -43,11 +43,11 @@ public class SourceUpdate extends SourceBase {
         this.sourceToUpdate = sourceToUpdate;
     }
 
-    public SourceUpdateState getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(SourceUpdateState state) {
+    public void setState(State state) {
         this.state = state;
     }
 }

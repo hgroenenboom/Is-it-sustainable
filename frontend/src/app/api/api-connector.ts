@@ -32,8 +32,20 @@ export class ApiService {
       // options.params = serialize(args);
     }
 
-    return this.http.get(this.url + path, { withCredentials: false, responseType: 'text' })
+    return this.http.get(this.url + path, { withCredentials: false, responseType: 'json' })
       .pipe(catchError(this.checkError.bind(this)));
+  }
+
+  post(path: string, body: any, customHeaders?: HttpHeaders): Observable<any> {
+    return this.request(path, body, RequestMethod.Post, customHeaders);
+  }
+
+  private request(path: string, body: any, method = RequestMethod.Post, custemHeaders?: HttpHeaders): Observable<any> {
+    const req = new HttpRequest(method, this.url + path, body, { withCredentials: false, responseType: 'json' });
+
+    return this.http.request(req).pipe(filter(response => response instanceof HttpResponse))
+      .pipe(map((response: HttpResponse<any>) => response.body))
+      .pipe(catchError(error => this.checkError(error)));
   }
 
   private checkError(error: any): any {

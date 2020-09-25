@@ -11,15 +11,19 @@ public class Organization {
 
     private String name;
     private String website;
+    private State state;
 
     @ManyToMany
     private List<Organization> partners;
 
-    public Organization(String name, String website, List<Organization> partners) {
+    public Organization(String name, String website, State state, List<Organization> partners) {
         this.name = name;
         this.website = website;
+        this.state = state;
         this.partners = partners;
     }
+
+    protected Organization() {}
 
     public Long getId() {
         return id;
@@ -47,5 +51,13 @@ public class Organization {
 
     public void setPartners(List<Organization> partners) {
         this.partners = partners;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 }

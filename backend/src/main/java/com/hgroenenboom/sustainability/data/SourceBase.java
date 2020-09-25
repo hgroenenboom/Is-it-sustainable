@@ -9,12 +9,12 @@ public class SourceBase {
     private String fallbackUrl;
     private String notes;
 
-    private SourceState sourceState;
+    private State sourceState;
     private SourceType sourceType;
 
     protected SourceBase() {}
 
-    public SourceBase(String description, String url, String fallbackUrl, String notes, SourceState sourceState, SourceType sourceType) {
+    public SourceBase(String description, String url, String fallbackUrl, String notes, State sourceState, SourceType sourceType) {
         this.description = description;
         this.url = url;
         this.fallbackUrl = fallbackUrl;
@@ -55,11 +55,11 @@ public class SourceBase {
         this.notes = notes;
     }
 
-    public SourceState getSourceState() {
+    public State getState() {
         return sourceState;
     }
 
-    public void setSourceState(SourceState sourceState) {
+    public void setState(State sourceState) {
         this.sourceState = sourceState;
     }
 

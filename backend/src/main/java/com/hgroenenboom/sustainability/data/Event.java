@@ -1,7 +1,6 @@
 package com.hgroenenboom.sustainability.data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Event {
@@ -12,16 +11,22 @@ public class Event {
     private String name;
     private String description;
     private SustainabilityType type;
-    // TODO - date
+    private State state;
+
+    private int startYear;
+    private int endYear;
     // TODO - location
 
     @ManyToOne
     private Organization organization;
 
-    public Event(String name, String description, SustainabilityType type, Organization organization) {
+    public Event(String name, String description, SustainabilityType type, State state, int startYear, int endYear, Organization organization) {
         this.name = name;
         this.description = description;
         this.type = type;
+        this.state = state;
+        this.startYear = startYear;
+        this.endYear = endYear;
         this.organization = organization;
     }
 
@@ -61,5 +66,29 @@ public class Event {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public int getStartYear() {
+        return startYear;
+    }
+
+    public void setStartYear(int startYear) {
+        this.startYear = startYear;
+    }
+
+    public int getEndYear() {
+        return endYear;
+    }
+
+    public void setEndYear(int endYear) {
+        this.endYear = endYear;
     }
 }
