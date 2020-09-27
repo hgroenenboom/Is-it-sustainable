@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpResponse} from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import {catchError, filter, map, retry} from 'rxjs/operators';
-// import {serialize} from 'v8';
 
 export enum RequestMethod {
   Get = 'GET',
@@ -26,13 +25,8 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   get(path: string, args?: any): Observable<any> {
-    console.log('inside GET');
-
-    if (args) {
-      // options.params = serialize(args);
-    }
-
-    return this.http.get(this.url + path, { withCredentials: false, responseType: 'json' })
+    const x = args ? JSON.parse(JSON.stringify(args)) : {};
+    return this.http.get(this.url + path, { withCredentials: false, responseType: 'json', params: x })
       .pipe(catchError(this.checkError.bind(this)));
   }
 

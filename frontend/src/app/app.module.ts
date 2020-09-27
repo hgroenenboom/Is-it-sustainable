@@ -11,12 +11,14 @@ import { OrganizationListComponent } from './components/organization-list/organi
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './layout/header/header.component';
+import { OrganizationComponent } from './components/items/organization/organization.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrganizationListComponent,
-    HeaderComponent
+    HeaderComponent,
+    OrganizationComponent
   ],
   imports: [
     BrowserModule,

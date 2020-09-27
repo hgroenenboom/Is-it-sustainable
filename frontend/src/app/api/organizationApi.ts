@@ -20,4 +20,8 @@ export class OrganizationApi {
   addOrganization(organization: OrganizationDto): Observable<any> {
     return this.apiService.post(this.path + 'save', JSON.parse(JSON.stringify(organization)), null);
   }
+
+  getOrganizationById(id: number): Observable<OrganizationDto> {
+    return this.apiService.get(this.path + 'getById', { id } );
+  }
 }

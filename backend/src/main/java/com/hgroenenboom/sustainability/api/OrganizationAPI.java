@@ -25,7 +25,12 @@ public class OrganizationAPI {
 
     @PostMapping("/save")
     void save(@RequestBody Organization o) {
-
         organizationService.save(o);
     }
+
+    @GetMapping("/getById")
+    Organization getById(@RequestParam("id") Long i) {
+        return organizationService.findById(i).get();
+    }
+
 }

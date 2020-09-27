@@ -2,7 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {OrganizationDto} from '../../dto/organizationDto';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrganizationApi} from '../../api/organizationApi';
-import {MatExpansionModule} from '@angular/material/expansion';
+
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-organization-list',
@@ -20,7 +21,7 @@ export class OrganizationListComponent implements OnInit {
   org: OrganizationDto;
   orgForm: FormGroup;
 
-  constructor(private organizationService: OrganizationApi) {
+  constructor(private organizationService: OrganizationApi, private router: Router) {
     organizationService.getOrganizations().subscribe(
       (event) => {
         this.orgs = [];
@@ -32,8 +33,6 @@ export class OrganizationListComponent implements OnInit {
         }
       }
     );
-
-    // organizationService.addOrganization(new OrganizationDto(null, 'test', 'www.nl', null)).subscribe();
   }
 
   ngOnInit(): void {
