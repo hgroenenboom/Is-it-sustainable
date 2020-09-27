@@ -72,7 +72,7 @@ export class OrganizationListComponent implements OnInit {
         for (let i = 0; i < event.length; i++) {
           const e = event[i];
           // @ts-ignore
-          this.orgs[i] = new OrganizationDto(e.id, e.name, e.website, e.partnerIds);
+          this.orgs[i] = new OrganizationDto(e.id, e.name, e.website, e.partnerIds, e.organizationTags);
         }
       }
     );

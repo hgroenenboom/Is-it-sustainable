@@ -15,7 +15,7 @@ public class OrganizationService {
     }
 
     public List<Organization> getAll() {
-        return this.repository.findAll();
+        return this.repository.findAllByOrderByNameAsc();
     }
 
     public Organization save(Organization o) {
@@ -23,4 +23,8 @@ public class OrganizationService {
     }
 
     public Optional<Organization> findById(Long i) { return this.repository.findById(i); }
+
+    public List<Organization> findByName(String name) {
+        return this.repository.findByNameContainsOrderByNameAsc(name);
+    }
 }

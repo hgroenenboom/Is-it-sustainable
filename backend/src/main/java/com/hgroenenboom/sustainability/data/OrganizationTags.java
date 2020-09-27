@@ -11,12 +11,10 @@ public class OrganizationTags {
 
     private String tagName;
 
-    @ManyToMany
-    private List<Organization> organizations;
+    public OrganizationTags() { }
 
-    public OrganizationTags(String tagName, List<Organization> organizations) {
+    public OrganizationTags(String tagName) {
         this.tagName = tagName;
-        this.organizations = organizations;
     }
 
     public Long getId() {
@@ -29,13 +27,5 @@ public class OrganizationTags {
 
     public void setTagName(String tagName) {
         this.tagName = tagName;
-    }
-
-    public List<Organization> getOrganizations() {
-        return organizations;
-    }
-
-    public void setOrganizations(List<Organization> organizations) {
-        this.organizations = organizations;
     }
 }

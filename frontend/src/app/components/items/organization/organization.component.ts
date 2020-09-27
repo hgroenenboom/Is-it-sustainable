@@ -14,7 +14,7 @@ export class OrganizationComponent implements OnInit {
   subscription: Subscription;
 
   constructor(private route: ActivatedRoute, private orgService: OrganizationApi) {
-    this.organization = new OrganizationDto(null, null, null, null);
+    this.organization = new OrganizationDto(null, null, null, null, null);
     const that = this;
     this.subscription = this.route.queryParams.subscribe(params => {
       orgService.getOrganizationById(params.id).subscribe(event => {

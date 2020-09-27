@@ -16,40 +16,41 @@
 
           <div class="cross-validation" [class.cross-validation-error]="orgForm.errors?.identityRevealed && (orgForm.touched || orgForm.dirty)">
             <div class="form-group">
-
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of nameOptions" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
               <label for="name">Name</label>
-              <input id="name" class="form-control"
-                     formControlName="name" required >
-
-              <div *ngIf="name.invalid && (name.dirty || name.touched)"
-                   class="alert alert-danger">
-
-                <div *ngIf="name.errors.required">
-                  Name is required.
-                </div>
-                <div *ngIf="name.errors.minlength">
-                  Name must be at least 4 characters long.
-                </div>
-                <div *ngIf="name.errors.forbiddenName">
-                  Name cannot be Bob.
-                </div>
-              </div>
+              <input id="name" class="form-control" formControlName="name" (keyup)=findOrganizationsByName() required matInput [formControl]="nameControl" [matAutocomplete]="auto">
             </div>
 
             <div class="form-group">
               <label for="website">website</label>
-              <input id="website" class="form-control"
-                     formControlName="website"  >
-
+              <input id="website" class="form-control" formControlName="website">
               <div *ngIf="website.pending">Validating...</div>
-              <div *ngIf="website.invalid && (website.dirty || website.touched)" class="alert alert-danger alter-ego-errors">
+              <div *ngIf="website.invalid && (website.touched)" class="alert alert-danger alter-ego-errors">
                 Website is required
-                <!--<div *ngIf="website.errors?.uniqueWebsite">
-                  Alter ego is already taken.
-                </div>-->
               </div>
             </div>
 
+            <div class="form-group">
+              <label for="tags">tags</label>
+              <!-- Shows selected tags-->
+              <mat-chip-list id="tags" #chipList aria-label="selecting tags" required (keyup)=findOrganizationTagsByName()>
+                  <mat-chip *ngFor="let selectedTag of selectedTags" [value]="selectedTag" [selectable]="selectable" [removable]="removable" (removed)="remove(selectedTag)">
+                    <mat-icon matChipRemove *ngIf="removable">x</mat-icon>
+                    {{selectedTag}}
+                  </mat-chip>
+              </mat-chip-list>
+              <!-- The actual input field              -->
+              <input #tagInput placeholder="New tag..." required class="form-control" (keyup)=findOrganizationTagsByName($event) [formControl]="tagControl" formControlName="tags" [matAutocomplete]="tagsAuto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+              <mat-autocomplete #tagsAuto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let possibleTag of tagOptions" [value]="possibleTag">
+                  {{possibleTag}}
+                </mat-option>
+              </mat-autocomplete>
+            </div>
           </div>
 
           <button type="submit" class="btn btn-default"

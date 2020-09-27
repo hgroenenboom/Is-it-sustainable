@@ -16,11 +16,15 @@ public class Organization {
     @ManyToMany
     private List<Organization> partners;
 
-    public Organization(String name, String website, State state, List<Organization> partners) {
+    @ManyToMany
+    private List<OrganizationTags> organizationTags;
+
+    public Organization(String name, String website, State state, List<Organization> partners, List<OrganizationTags> tags, List<OrganizationTags> organizationTags) {
         this.name = name;
         this.website = website;
         this.state = state;
         this.partners = partners;
+        this.organizationTags = organizationTags;
     }
 
     protected Organization() {}
@@ -59,5 +63,13 @@ public class Organization {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public List<OrganizationTags> getOrganizationTags() {
+        return organizationTags;
+    }
+
+    public void setOrganizationTags(List<OrganizationTags> organizationTags) {
+        this.organizationTags = organizationTags;
     }
 }
