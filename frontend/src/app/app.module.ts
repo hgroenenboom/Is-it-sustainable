@@ -14,13 +14,15 @@ import { HeaderComponent } from './layout/header/header.component';
 import { OrganizationComponent } from './components/items/organization/organization.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { OrganizationCreatorComponent } from './components/creators/organization-creator/organization-creator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrganizationListComponent,
     HeaderComponent,
-    OrganizationComponent
+    OrganizationComponent,
+    OrganizationCreatorComponent
   ],
   imports: [
     BrowserModule,

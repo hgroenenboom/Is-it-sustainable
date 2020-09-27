@@ -1,72 +1,8 @@
 <!--https://stackblitz.com/angular/yvxrqopovev?file=src%2Fapp%2Fapp.component.ts-->
 
+<app-organization-creator #updater id="updater" class="d-none"></app-organization-creator>
 <div class="container mt-4" >
-  <div class="ml-5 mr-5 mb-5 p-3" *ngIf="isChecked()">
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <b>Submit organization</b>
-        </mat-panel-title>
-        <mat-panel-description>
-  <!--        <i>{{panelOpenState ? 'close' : 'open'}} organization sumbission panel</i>-->
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div class="bg-light">
-        <form [formGroup]="orgForm" (ngSubmit)="submitForm()" #formDir="ngForm">
-
-          <div class="card-body" [hidden]="formDir.submitted">
-
-            <div class="cross-validation" [class.cross-validation-error]="orgForm.errors?.identityRevealed && (orgForm.touched || orgForm.dirty)">
-              <div class="form-group">
-
-                <label for="name">Name</label>
-                <input id="name" class="form-control"
-                       formControlName="name" required >
-
-                <div *ngIf="name.invalid && (name.dirty || name.touched)"
-                     class="alert alert-danger">
-
-                  <div *ngIf="name.errors.required">
-                    Name is required.
-                  </div>
-                  <div *ngIf="name.errors.minlength">
-                    Name must be at least 4 characters long.
-                  </div>
-                  <div *ngIf="name.errors.forbiddenName">
-                    Name cannot be Bob.
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="website">website</label>
-                <input id="website" class="form-control"
-                       formControlName="website"  >
-
-                <div *ngIf="website.pending">Validating...</div>
-                <div *ngIf="website.invalid && (website.dirty || website.touched)" class="alert alert-danger alter-ego-errors">
-                  Website is required
-                  <!--<div *ngIf="website.errors?.uniqueWebsite">
-                    Alter ego is already taken.
-                  </div>-->
-                </div>
-              </div>
-
-            </div>
-
-            <button type="submit" class="btn btn-default"
-                    [disabled]="orgForm.invalid">Submit</button>
-          </div>
-        </form>
-        <div class="submitted-message" *ngIf="formDir.submitted && !init">
-          <p *ngIf="!init">You've submitted your organization, {{ orgForm.value.name }}!</p>
-          <button (click)="formDir.resetForm({})">Add new organization</button>
-        </div>
-      </div>
-    </mat-expansion-panel>
-  </div>
-
+  <app-organization-creator class="ml-5 mr-5 mb-5 p-3"></app-organization-creator>
   <div class="card bg-light">
     <div class="card-title m-3">
       <h4>Organizations</h4>
@@ -82,11 +18,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let org of orgs" [routerLink]="['organization']" [queryParams]="{ id: org.id }">
+          <tr *ngFor="let org of orgs">
   <!--              <th scope="row">{{ org.id }}</th>-->
-            <td>{{ org.name}}</td>
-            <td><a href='{{ org.website}}'>{{ org.website}}</a></td>
+            <td><a class="custom-link" [routerLink]="['organization']" [queryParams]="{ id: org.id }">{{ org.name}}</a></td>
+            <td><a target="_blank" href='{{ org.website}}'>{{ org.website}}</a></td>
             <td>{{ org.partnerIds }}</td>
+            <td *ngIf="isEditMode()"><button (click)="showUpdater($event, org)">update</button></td>
           </tr>
         </tbody>
       </table>

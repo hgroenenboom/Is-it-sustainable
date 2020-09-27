@@ -1,10 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {OrganizationDto} from '../../dto/organizationDto';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrganizationApi} from '../../api/organizationApi';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Globals } from '../../globals';
+import {Globals} from '../../globals';
+import {
+  OrganizationCreatorComponent,
+  OrganizationCreatorComponentType
+} from '../creators/organization-creator/organization-creator.component';
+import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-organization-list',
@@ -12,15 +16,11 @@ import { Globals } from '../../globals';
   styleUrls: ['./organization-list.component.css']
 })
 export class OrganizationListComponent implements OnInit {
-  title = 'IsItSustainable';
-  panelOpenState: boolean;
-
   @Input()
   orgs: OrganizationDto[];
 
-  init = true;
-  org: OrganizationDto;
-  orgForm: FormGroup;
+  oldUpdateButton: ElementRef = null;
+  @ViewChild('updater') updater: OrganizationCreatorComponent;
 
   constructor(private organizationService: OrganizationApi, private router: Router, private globals: Globals) {
     organizationService.getOrganizations().subscribe(
@@ -37,34 +37,35 @@ export class OrganizationListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.org = new OrganizationDto(null, null, null, null);
-
-    this.orgForm = new FormGroup({
-      name: new FormControl(this.org.name, [
-        Validators.required,
-        Validators.minLength(1)
-      ]),
-      website: new FormControl(this.org.website, [
-        Validators.required,
-        Validators.minLength(1)
-      ])
-    });
   }
 
-  get name() { return this.orgForm.get('name'); }
-  get website() { return this.orgForm.get('website'); }
-
-  submitForm(): void {
-    this.init = false;
-    this.org.name = this.name.value;
-    this.org.website = this.website.value;
-    this.organizationService.addOrganization(this.org).subscribe(event => {
-      console.log(event);
-    });
+  ngAfterViewInit(): void {
+    this.updater.type = OrganizationCreatorComponentType.Update;
+    this.updater.onSubmission = (caller) => {
+      const updater = document.getElementById('updater');
+      updater.classList.add('d-none');
+    };
   }
 
-  isChecked(): boolean {
-    console.log(this.globals);
+  isEditMode(): boolean {
     return this.globals.checked.getValue();
+  }
+
+  showUpdater(event, org: OrganizationDto) {
+    if (this.oldUpdateButton) {
+      this.oldUpdateButton.nativeElement.classList.remove('d-none');
+    }
+
+    const button = event.target || event.srcElement || event.currentTarget;
+    const parent = button.parentNode;
+
+    this.updater.setFormElements(org);
+
+    const updater = document.getElementById('updater');
+    parent.appendChild(updater);
+    updater.classList.remove('d-none');
+
+    this.oldUpdateButton = new ElementRef(button);
+    this.oldUpdateButton.nativeElement.classList.add('d-none');
   }
 }
