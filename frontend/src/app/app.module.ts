@@ -12,6 +12,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './layout/header/header.component';
 import { OrganizationComponent } from './components/items/organization/organization.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { OrganizationComponent } from './components/items/organization/organizat
     ReactiveFormsModule,
 
     MatExpansionModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

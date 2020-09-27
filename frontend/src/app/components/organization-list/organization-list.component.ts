@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrganizationApi} from '../../api/organizationApi';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'app-organization-list',
@@ -21,7 +22,7 @@ export class OrganizationListComponent implements OnInit {
   org: OrganizationDto;
   orgForm: FormGroup;
 
-  constructor(private organizationService: OrganizationApi, private router: Router) {
+  constructor(private organizationService: OrganizationApi, private router: Router, private globals: Globals) {
     organizationService.getOrganizations().subscribe(
       (event) => {
         this.orgs = [];
@@ -60,5 +61,10 @@ export class OrganizationListComponent implements OnInit {
     this.organizationService.addOrganization(this.org).subscribe(event => {
       console.log(event);
     });
+  }
+
+  isChecked(): boolean {
+    console.log(this.globals);
+    return this.globals.checked.getValue();
   }
 }

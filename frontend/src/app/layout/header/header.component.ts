@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
+import {Globals} from '../../globals';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  constructor(private globals: Globals) { }
 
   ngOnInit(): void {
   }
 
+  changeEdit(mattoggle: MatSlideToggleChange) {
+    this.globals.checked.next(mattoggle.checked);
+  }
 }

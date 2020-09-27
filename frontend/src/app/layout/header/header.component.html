@@ -1,5 +1,6 @@
-<header class="bg-secondary" [routerLink]="['']">
-  <div class="p-2">
-    <h1 class="text-center">IsItSustainable</h1>
+<header class="navbar bg-light">
+  <div class="p-2 container">
+    <h1 class="navbar-brand" [routerLink]="['']">IsItSustainable</h1>
+    <mat-slide-toggle (change)="changeEdit($event)">Edit</mat-slide-toggle>
   </div>
 </header>

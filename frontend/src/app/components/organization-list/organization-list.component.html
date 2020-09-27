@@ -1,7 +1,7 @@
 <!--https://stackblitz.com/angular/yvxrqopovev?file=src%2Fapp%2Fapp.component.ts-->
 
-<div class="container mt-4">
-  <div class="card bg-light ml-5 mr-5 mb-5 p-3">
+<div class="container mt-4" >
+  <div class="ml-5 mr-5 mb-5 p-3" *ngIf="isChecked()">
     <mat-expansion-panel (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
