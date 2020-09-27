@@ -12,7 +12,7 @@
     <div class="bg-light">
       <form [formGroup]="orgForm" (ngSubmit)="submitForm()" #formDir="ngForm">
 
-        <div class="card-body" [hidden]="formDir.submitted">
+        <div class="card-body" [hidden]="!init">
 
           <div class="cross-validation" [class.cross-validation-error]="orgForm.errors?.identityRevealed && (orgForm.touched || orgForm.dirty)">
             <div class="form-group">
@@ -58,7 +58,7 @@
       </form>
       <div class="submitted-message" *ngIf="formDir.submitted && !init">
         <p *ngIf="!init">You've succesfully {{type == 0 ? 'submitted' : 'updated'}} the organization '{{ orgForm.value.name }}'</p>
-        <button *ngIf="type == 1" (click)="formDir.resetForm({})">Add new organization</button>
+        <button *ngIf="type == 0" (click)=resetForm()>Add new organization</button>
       </div>
     </div>
   </mat-expansion-panel>

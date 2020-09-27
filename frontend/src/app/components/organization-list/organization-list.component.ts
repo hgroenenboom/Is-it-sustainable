@@ -21,29 +21,24 @@ export class OrganizationListComponent implements OnInit {
 
   oldUpdateButton: ElementRef = null;
   @ViewChild('updater') updater: OrganizationCreatorComponent;
+  @ViewChild('creator') creator: OrganizationCreatorComponent;
 
   constructor(private organizationService: OrganizationApi, private router: Router, private globals: Globals) {
-    organizationService.getOrganizations().subscribe(
-      (event) => {
-        this.orgs = [];
-
-        for (let i = 0; i < event.length; i++) {
-          const e = event[i];
-          // @ts-ignore
-          this.orgs[i] = new OrganizationDto(e.id, e.name, e.website, e.partnerIds);
-        }
-      }
-    );
+    this.updateOrganizations();
   }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
+    const that = this;
     this.updater.type = OrganizationCreatorComponentType.Update;
     this.updater.onSubmission = (caller) => {
       const updater = document.getElementById('updater');
       updater.classList.add('d-none');
+      caller.resetForm();
+    };
+    this.creator.onSubmission = (caller) => {
     };
   }
 
@@ -67,5 +62,19 @@ export class OrganizationListComponent implements OnInit {
 
     this.oldUpdateButton = new ElementRef(button);
     this.oldUpdateButton.nativeElement.classList.add('d-none');
+  }
+
+  private updateOrganizations(): void {
+    this.organizationService.getOrganizations().subscribe(
+      (event) => {
+        this.orgs = [];
+
+        for (let i = 0; i < event.length; i++) {
+          const e = event[i];
+          // @ts-ignore
+          this.orgs[i] = new OrganizationDto(e.id, e.name, e.website, e.partnerIds);
+        }
+      }
+    );
   }
 }

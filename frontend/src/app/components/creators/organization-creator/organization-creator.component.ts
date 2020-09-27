@@ -16,8 +16,8 @@ export enum OrganizationCreatorComponentType {
 })
 export class OrganizationCreatorComponent implements OnInit {
   panelOpenState: boolean;
-  public type: OrganizationCreatorComponentType = OrganizationCreatorComponentType.New;
   init = true;
+  public type: OrganizationCreatorComponentType = OrganizationCreatorComponentType.New;
 
   org: OrganizationDto;
   orgForm: FormGroup;
@@ -27,8 +27,11 @@ export class OrganizationCreatorComponent implements OnInit {
   constructor(private organizationService: OrganizationApi, private globals: Globals) { }
 
   ngOnInit(): void {
-    this.org = new OrganizationDto(null, null, null, null);
+    this.resetForm();
+  }
 
+  resetForm(): void {
+    this.org = new OrganizationDto(null, null, null, null);
     this.orgForm = new FormGroup({
       name: new FormControl(this.org.name, [
         Validators.required,
@@ -39,6 +42,8 @@ export class OrganizationCreatorComponent implements OnInit {
         Validators.minLength(1)
       ])
     });
+
+    this.init = true;
   }
 
   setFormElements(organization: OrganizationDto): void {
@@ -56,12 +61,10 @@ export class OrganizationCreatorComponent implements OnInit {
     this.init = false;
     this.org.name = this.name.value;
     this.org.website = this.website.value;
-
-    if (this.onSubmission != null) {
-      this.onSubmission(this);
-    }
-
     this.organizationService.addOrganization(this.org).subscribe(event => {
+      if (this.onSubmission != null) {
+        this.onSubmission(this);
+      }
     });
   }
 
