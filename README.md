@@ -108,3 +108,18 @@ Compile and host Angular server (on default port)
 
 ### 3. Done!
 Navigate in your browser to: [http://localhost:4200/](http://localhost:4200/)
+
+### Shields
+![GitHub](https://img.shields.io/github/license/hgroenenboom/Is-it-sustainable)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/hgroenenboom/Is-it-sustainable)
+![GitHub last commit](https://img.shields.io/github/last-commit/hgroenenboom/Is-it-sustainable)
+
+![GitHub repo file count](https://img.shields.io/github/directory-file-count/hgroenenboom/Is-it-sustainable)
+![GitHub top language](https://img.shields.io/github/languages/top/hgroenenboom/Is-it-sustainable)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hgroenenboom/Is-it-sustainable)
+![GitHub repo size](https://img.shields.io/github/repo-size/hgroenenboom/Is-it-sustainable)
+![GitHub language count](https://img.shields.io/github/languages/count/hgroenenboom/Is-it-sustainable)
+
+![GitHub issues](https://img.shields.io/github/issues-raw/hgroenenboom/Is-it-sustainable)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/hgroenenboom/Is-it-sustainable)
+![GitHub contributors](https://img.shields.io/github/contributors/hgroenenboom/Is-it-sustainable)
